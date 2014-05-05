@@ -14,10 +14,11 @@ add $s2, $s1, $s0
 sw $s2, 0x54($0)
 
  For the second task, the objective was to...
- 1)
- 2)
- 3)
- 4)
+ 1) Hand assemble the above into machine code
+ 2) Test program using MIPs
+ 3) Grab a screenshot of your waveform and upload it to GitHub
+ 4) Explain whether the program worked and why
+ 
 
 | Assembly        | Bits           | Machine Code  |
 | ------------- |:-------------:| -----:|
@@ -25,3 +26,7 @@ sw $s2, 0x54($0)
 | addi $s1, $0, -37 | 001000 00000 10001 1111111111011011   | 0x2011FFDB |
 | add $s2, $s1, $s0| 000000 10000 10001 10010 00000 100000 | 0x02119020 |
 | sw $s2, 0x54($0)  | 101011 00000 10010 0000000000110110   | 0xAC120054 |
+
+
+
+
