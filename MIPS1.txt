@@ -1,0 +1,4 @@
+addi $S0, $0, 0x2C
+addi $S1, $0, 0xFDB
+add $S2, $S0, $S1
+sw $s2, 0x54(0)
