@@ -13,6 +13,8 @@ addi $s1, $0, -37
 add $s2, $s1, $s0
 sw $s2, 0x54($0)
 
+#####-----------------------------------------------------------------------------
+
  For the second task, the objective was to...
  1) Hand assemble the above into machine code
  2) Test program using MIPs
@@ -27,6 +29,7 @@ sw $s2, 0x54($0)
 | add $s2, $s1, $s0| 000000 10000 10001 10010 00000 100000 | 0x02119020 |
 | sw $s2, 0x54($0)  | 101011 00000 10010 0000000000110110   | 0xAC120054 |
 
+#####-----------------------------------------------------------------------------
 
 ![alt text] (http://i57.tinypic.com/2gxlcn5.png)
 
@@ -35,6 +38,9 @@ The screenshot above shows the instructions for the 44 and -37 taking place. You
 For the third task, we were supposed to augment the MIPS architecture in order for it to support an ORI instruction. To begin this task, I first filled out the rest of the table in the lab handout (shown below) to help create a proper control instruction and the help me think about what I wanted to do with the code. Notable things are setting the ALUop11 assignment to ORI.
 
 ![alt text] (http://i62.tinypic.com/oforww.png)
+
+#####-----------------------------------------------------------------------------
+
 
 After having the opcode/control code set, the next part of my design process was to make changes to the actual hardware in order to accommodate the changes. I'll be honest, I had no idea where to start, but I heard Captain Silva mention zero extender in class, so I went ahead and pursued that option in a blind leap of faith. So I made the zero extender first and foremost, afterwards I knew I would need a way to select between the sign and zero extender, so I made a multiplexer that would only pick the zero extender in the case of an ORI instruction. To accomplish this I looked at the control signal and realize that but having a specialized AND gate I could make the control signal for the multiplexer only pick the zero extend signal in the case of an ORI. The diagram below kind of communicates it better than words. I am also garbage at drawing straightlines, so I made this diagram in MS paint to save your eyes.
 
@@ -50,5 +56,30 @@ This in effect made sure that orisig would only be 1, and only select the zero e
 
 Other changes worth noting were updating the case statement to recognize an ORI instruction and updating the ALUop table to recognize an ORI instruction.
 
+#####-----------------------------------------
+
 After all of the above changes were made, I decided to run the testbench to see if the code worked as planned.The instructions I ran can be seen below.
+
+     	  instr <= X"2010002C"; --loaded 44 into $s0
+        wait for clk_period;
+        
+        instr <= X"2011FFDB";  --loaded -37 into $s1
+        wait for clk_period;
+        
+        instr <= X"02119020";  --added $s1 and $s0, stored in $s2
+        wait for clk_period;
+        
+        instr <= X"AC120054";  -- stored $s2 into hex memory x54
+        wait for clk_period;
+
+		      instr <= X"36130082";  --bitwise OR (hex 82) and $s0 and store into register $s3
+		      wait for clk_period;
+
+![alt text](http://i61.tinypic.com/2urxb4h.jpg)
+
+The diagram above shows the waveform for the above instruction set. You can see that 44 in hex value is loaded into $s0, which is value 16. Afterwards -37 in hex value is loaded into $s1, which is value 17. The two values are then added together and stored in $s2, which can be seen in value 18. The last instruction, the ORI one, does a bitwise OR of hex 82 and $s0, and then stores the value into $s3, which is value 19. The bitwise OR of hex 82 (10000010) and 44 (00101100) is 
+(10101110), or AE in hex value. This AE canbe seen in register value 19 which corresponds to $s3, confirming that our testbench and vhd file is correct.
+
+
+
 
