@@ -30,7 +30,7 @@ sw $s2, 0x54($0)
 
 ![alt text] (http://i57.tinypic.com/2gxlcn5.png)
 
-THe screenshot above
+The screenshot above shows the instructions for the 44 and -37 taking place. You can see that the values are loaded into registers as hex values. Then, the next few cycles show the result of the addition, 7, being stored into a register. The last cycle of interest shows this value being overwritten by the 54.
 
 For the third task
 
