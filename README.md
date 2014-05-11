@@ -33,7 +33,7 @@ sw $s2, 0x54($0)
 
 ![alt text] (http://i57.tinypic.com/2gxlcn5.png)
 
-The screenshot above shows the instructions for the 44 and -37 taking place. You can see that the values are loaded into registers as hex values. Then, the next few cycles show the result of the addition, 7, being stored into a register. The last cycle of interest shows this value being replaced by the 54.
+The screenshot above shows the instructions for the 44 and -37 taking place. You can see that 44, or hex 002c is being loaded into the wd area. This value is then loaded into the rd file. Afterwards, you can see that -37, or hex ffdb is being loaded into the wd signal, and then loaded into the rd file. This confirms that the hex values were loaded into the registers. Afterwards you can see that hex value 54 is loaded into the wd signal. This shows that the instructions written in the test bench were executed correctly.
 
 For the third task, we were supposed to augment the MIPS architecture in order for it to support an ORI instruction. To begin this task, I first filled out the rest of the table in the lab handout (shown below) to help create a proper control instruction and the help me think about what I wanted to do with the code. Notable things are setting the ALUop11 assignment to ORI.
 
