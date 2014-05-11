@@ -48,4 +48,7 @@ The next change that needed to occur was to create the multiplexer, the and gate
   
 This in effect made sure that orisig would only be 1, and only select the zero extend in the case of an ORI or OR j instruction. Initially I tried using bits of the control or ALUop signal, but this did not work and I could never figure out why. My best guess is because it was not declared in the architecture of the datapath. Going off of this,I decided to use the ALU control signal since it was declared in the datapath.
 
+Other changes worth noting were updating the case statement to recognize an ORI instruction and updating the ALUop table to recognize an ORI instruction.
+
+After all of the above changes were made, I decided to run the testbench to see if the code worked as planned.The instructions I ran can be seen below.
 
