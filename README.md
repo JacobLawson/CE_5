@@ -30,3 +30,7 @@ sw $s2, 0x54($0)
 
 ![alt text] (http://i57.tinypic.com/2gxlcn5.png)
 
+THe screenshot above
+
+For the third task
+
